@@ -366,6 +366,17 @@
       }
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
     @media (hover: none) {
       .split-side:hover .split-bg,
       .photo-card:hover img {
@@ -427,6 +438,37 @@
 
     .photo-card:hover img {
       transform: scale(1.03);
+    }
+
+    @keyframes gallery-item-enter {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes gallery-title-enter {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .gallery-reveal .photo-card {
+      animation: gallery-item-enter 420ms ease both;
+      animation-delay: calc(var(--item-index, 0) * 35ms);
+    }
+
+    .gallery-title-enter {
+      animation: gallery-title-enter 360ms ease both;
     }
 
     .photo-overlay {
@@ -565,27 +607,60 @@
 
     @media (max-width: 550px) {
       .lightbox {
-        padding: 12px;
+        height: 100%;
+        height: 100dvh;
+        padding: max(12px, env(safe-area-inset-top)) 12px max(12px, env(safe-area-inset-bottom));
+      }
+
+      .lightbox.active {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: minmax(0, 1fr) auto;
+        justify-items: center;
+        align-items: center;
+        column-gap: 12px;
+        row-gap: 8px;
+      }
+
+      .lightbox-content {
+        grid-column: 1 / -1;
+        grid-row: 1;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        min-height: 0;
+        justify-content: center;
+      }
+
+      .lightbox-img {
+        width: 100%;
+        max-height: calc(100dvh - 190px);
+      }
+
+      .lightbox-meta {
+        margin-top: 8px;
       }
 
       .lightbox-nav {
-        top: auto;
-        bottom: 88px;
-        width: 44px;
-        height: 44px;
+        position: static;
+        grid-row: 2;
+        width: 48px;
+        height: 48px;
+        transform: none;
+        margin-bottom: 4px;
       }
 
       .lightbox-prev {
-        left: 14px;
+        grid-column: 1;
       }
 
       .lightbox-next {
-        right: 14px;
+        grid-column: 2;
       }
 
       .lightbox-close {
-        top: 14px;
-        right: 14px;
+        top: max(12px, env(safe-area-inset-top));
+        right: 12px;
       }
     }
 
@@ -941,6 +1016,14 @@
     let currentPhotoIndex = 0;
     let touchStartX = null;
 
+    function animateGallery() {
+      grid.classList.remove('gallery-reveal');
+      galleryTitle.classList.remove('gallery-title-enter');
+      void grid.offsetWidth;
+      grid.classList.add('gallery-reveal');
+      galleryTitle.classList.add('gallery-title-enter');
+    }
+
     function renderAlbums(filter = 'todos') {
       galleryTitle.textContent = filter === 'todos'
         ? 'Álbumes'
@@ -957,13 +1040,15 @@
         message.className = 'empty-gallery';
         message.textContent = 'Todavía no hay álbumes en esta categoría.';
         grid.appendChild(message);
+        animateGallery();
         return;
       }
 
-      filtered.forEach(album => {
+      filtered.forEach((album, index) => {
         const card = document.createElement('button');
         card.type = 'button';
         card.className = 'photo-card album-card';
+        card.style.setProperty('--item-index', Math.min(index, 10));
         card.onclick = () => openAlbum(album.id);
         card.innerHTML = `
           <img src="${album.photos[0].src}" alt="" loading="lazy">
@@ -974,6 +1059,7 @@
         `;
         grid.appendChild(card);
       });
+      animateGallery();
     }
 
     function openAlbum(albumId) {
@@ -990,12 +1076,14 @@
       album.photos.forEach((photo, index) => {
         const card = document.createElement('div');
         card.className = 'photo-card';
+        card.style.setProperty('--item-index', Math.min(index, 10));
         card.onclick = () => openLightbox(album, index);
         card.innerHTML = `
           <img src="${photo.src}" alt="Fotografía del álbum ${album.title}" loading="lazy">
         `;
         grid.appendChild(card);
       });
+      animateGallery();
     }
 
     function backToAlbums() {
