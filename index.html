@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio Fotográfico | Deportes & Recitales</title>
+  <title>GEFEPE | Portfolio Fotográfico</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -55,6 +55,8 @@
       font-size: 1.25rem;
       letter-spacing: 1px;
       text-transform: uppercase;
+      color: inherit;
+      text-decoration: none;
     }
 
     .brand span {
@@ -357,13 +359,26 @@
     .cta-btn:hover {
       opacity: 0.85;
     }
+
+    .instagram-link {
+      display: block;
+      width: fit-content;
+      margin: 18px auto 0;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .instagram-link:hover {
+      color: var(--text-main);
+    }
   </style>
 </head>
 <body>
 
   <!-- NAVEGACIÓN -->
   <header>
-    <div class="brand">PRO<span>SHOOT</span></div>
+    <a class="brand" href="#inicio" aria-label="GEFEPE, inicio">GEFEPE</a>
     <nav>
       <a href="#galeria" onclick="filterGallery('todos')">Galería</a>
       <a href="#galeria" onclick="filterGallery('deportes')">Deportes</a>
@@ -373,7 +388,7 @@
   </header>
 
   <!-- SPLIT SCREEN INICIAL -->
-  <section class="hero-split">
+  <section class="hero-split" id="inicio">
     <!-- Mitad Deportes -->
     <div class="split-side" onclick="goToCategory('deportes')">
       <div class="split-bg" style="background-image: url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1400&q=80');"></div>
@@ -429,6 +444,7 @@
     <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; margin-bottom: 10px;">¿Buscás cobertura para tu próximo evento?</h3>
     <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto;">Partidos, torneos de fútbol 11 o shows en vivo. Captura de alta velocidad y entrega digital rápida.</p>
     <a href="https://wa.me/5491100000000?text=Hola,%20me%20gustar%C3%ADa%20consultar%20por%20una%20cobertura%20fotogr%C3%A1fica" target="_blank" class="cta-btn">Consultar por WhatsApp</a>
+    <a href="https://www.instagram.com/gefepe/" target="_blank" rel="noopener noreferrer" class="instagram-link" aria-label="Seguir a GEFEPE en Instagram">@gefepe en Instagram</a>
   </footer>
 
   <script>
