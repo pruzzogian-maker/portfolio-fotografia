@@ -136,4 +136,414 @@
     .split-title {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 3rem;
-      font-weight: 7
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .split-btn {
+      color: var(--text-main);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 4px;
+    }
+
+    /* FILTROS DE GALERIA */
+    .gallery-section {
+      max-width: 1300px;
+      margin: 80px auto;
+      padding: 0 20px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 35px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .section-header h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.2rem;
+    }
+
+    .filter-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--text-main);
+      color: var(--bg-dark);
+      border-color: var(--text-main);
+    }
+
+    /* GRILLA MASONRY */
+    .masonry-grid {
+      column-count: 3;
+      column-gap: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .masonry-grid { column-count: 2; }
+      .hero-split { flex-direction: column; }
+      .split-side:hover { flex: 1; }
+      .split-title { font-size: 2.2rem; }
+    }
+
+    @media (max-width: 550px) {
+      .masonry-grid { column-count: 1; }
+      header { padding: 0 20px; }
+    }
+
+    .photo-card {
+      break-inside: avoid;
+      margin-bottom: 20px;
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--card-bg);
+      cursor: pointer;
+      border: 1px solid var(--border-color);
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .photo-card:hover img {
+      transform: scale(1.03);
+    }
+
+    .photo-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(10, 11, 14, 0.95), transparent 85%);
+      padding: 20px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+    }
+
+    .photo-card:hover .photo-overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .photo-overlay h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .photo-overlay p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* LIGHTBOX VISOR FULLSCREEN */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(5, 6, 8, 0.95);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .lightbox-img {
+      max-width: 100%;
+      max-height: 75vh;
+      object-fit: contain;
+      border-radius: 6px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+    }
+
+    .lightbox-meta {
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .lightbox-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+    }
+
+    .lightbox-exif {
+      display: inline-block;
+      margin-top: 6px;
+      font-size: 0.85rem;
+      color: var(--accent);
+      background: rgba(255, 71, 87, 0.1);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-family: monospace;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 25px;
+      right: 30px;
+      font-size: 2rem;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+
+    /* FOOTER / CONTACTO */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 60px 20px;
+      text-align: center;
+      background: #0d0f13;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      margin-top: 20px;
+      background: var(--accent);
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 1px;
+      transition: opacity 0.2s;
+    }
+
+    .cta-btn:hover {
+      opacity: 0.85;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVEGACIÓN -->
+  <header>
+    <div class="brand">PRO<span>SHOOT</span></div>
+    <nav>
+      <a href="#galeria" onclick="filterGallery('todos')">Galería</a>
+      <a href="#galeria" onclick="filterGallery('deportes')">Deportes</a>
+      <a href="#galeria" onclick="filterGallery('recitales')">Recitales</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <!-- SPLIT SCREEN INICIAL -->
+  <section class="hero-split">
+    <!-- Mitad Deportes -->
+    <div class="split-side" onclick="goToCategory('deportes')">
+      <div class="split-bg" style="background-image: url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1400&q=80');"></div>
+      <div class="split-content">
+        <span class="split-badge">Fútbol & Disciplinas</span>
+        <h1 class="split-title">Deportes</h1>
+        <span class="split-btn">Ver trabajos</span>
+      </div>
+    </div>
+
+    <!-- Mitad Recitales -->
+    <div class="split-side" onclick="goToCategory('recitales')">
+      <div class="split-bg" style="background-image: url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1400&q=80');"></div>
+      <div class="split-content">
+        <span class="split-badge">En Vivo & Shows</span>
+        <h1 class="split-title">Recitales</h1>
+        <span class="split-btn">Ver trabajos</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIA MASONRY -->
+  <main class="gallery-section" id="galeria">
+    <div class="section-header">
+      <h2>Galería de Trabajos</h2>
+      <div class="filter-buttons">
+        <button class="filter-btn active" onclick="filterGallery('todos')">Todos</button>
+        <button class="filter-btn" onclick="filterGallery('deportes')">Deportes</button>
+        <button class="filter-btn" onclick="filterGallery('recitales')">Recitales</button>
+        <button class="filter-btn" onclick="filterGallery('detalle')">Detalle de Cancha</button>
+      </div>
+    </div>
+
+    <div class="masonry-grid" id="photoGrid">
+      <!-- Las fotos se inyectan dinámicamente con JavaScript -->
+    </div>
+  </main>
+
+  <!-- LIGHTBOX / VISOR -->
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <div class="lightbox-content">
+      <img src="" alt="" class="lightbox-img" id="lightboxImg">
+      <div class="lightbox-meta">
+        <h3 class="lightbox-title" id="lightboxTitle"></h3>
+        <span class="lightbox-exif" id="lightboxExif"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACTO -->
+  <footer id="contacto">
+    <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; margin-bottom: 10px;">¿Buscás cobertura para tu próximo evento?</h3>
+    <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto;">Partidos, torneos de fútbol 11 o shows en vivo. Captura de alta velocidad y entrega digital rápida.</p>
+    <a href="https://wa.me/5491100000000?text=Hola,%20me%20gustar%C3%ADa%20consultar%20por%20una%20cobertura%20fotogr%C3%A1fica" target="_blank" class="cta-btn">Consultar por WhatsApp</a>
+  </footer>
+
+  <script>
+    // Colección de fotografías (podés reemplazar las rutas de imagen 'src' por tus fotos locales de la carpeta img/)
+    const photos = [
+      {
+        id: 1,
+        category: 'deportes',
+        src: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1000&q=80',
+        title: 'Disputa aérea en el área',
+        exif: 'Nikon D7100 | Nikkor 70-300mm | 1/1250s - f/5.6 - ISO 1600'
+      },
+      {
+        id: 2,
+        category: 'recitales',
+        src: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1000&q=80',
+        title: 'Solo de guitarra bajo humo',
+        exif: 'Nikon D7100 | Yongnuo 35mm | 1/320s - f/2.0 - ISO 2500'
+      },
+      {
+        id: 3,
+        category: 'detalle',
+        src: 'https://images.unsplash.com/photo-1517927033932-b3d18e61fb3a?auto=format&fit=crop&w=1000&q=80',
+        title: 'Dorsal en la previa del partido',
+        exif: 'Nikon D7100 | Nikkor 70-300mm @ 180mm | 1/1000s - f/5.0 - ISO 400'
+      },
+      {
+        id: 4,
+        category: 'deportes',
+        src: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1000&q=80',
+        title: 'Ataque por banda derecha',
+        exif: 'Nikon D7100 | Nikkor 70-300mm | 1/1600s - f/5.6 - ISO 1250'
+      },
+      {
+        id: 5,
+        category: 'recitales',
+        src: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1000&q=80',
+        title: 'Luz cenital sobre escenario',
+        exif: 'Nikon D7100 | Yongnuo 35mm | 1/400s - f/2.2 - ISO 3200'
+      },
+      {
+        id: 6,
+        category: 'detalle',
+        src: 'https://images.unsplash.com/photo-1529900748604-07564a03e7a6?auto=format&fit=crop&w=1000&q=80',
+        title: 'Pelota sobre el césped',
+        exif: 'Nikon D7100 | Yongnuo 35mm | 1/800s - f/2.5 - ISO 200'
+      }
+    ];
+
+    const grid = document.getElementById('photoGrid');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxTitle = document.getElementById('lightboxTitle');
+    const lightboxExif = document.getElementById('lightboxExif');
+
+    // Renderizar grilla
+    function renderPhotos(filter = 'todos') {
+      grid.innerHTML = '';
+      const filtered = filter === 'todos' 
+        ? photos 
+        : photos.filter(p => p.category === filter);
+
+      filtered.forEach(photo => {
+        const card = document.createElement('div');
+        card.className = 'photo-card';
+        card.onclick = () => openLightbox(photo);
+        card.innerHTML = `
+          <img src="${photo.src}" alt="${photo.title}" loading="lazy">
+          <div class="photo-overlay">
+            <h4>${photo.title}</h4>
+            <p>${photo.exif}</p>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Filtrar galería con botones
+    function filterGallery(category) {
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.toLowerCase().includes(category) || (category === 'todos' && btn.textContent === 'Todos'));
+      });
+      renderPhotos(category);
+    }
+
+    // Navegar desde el hero
+    function goToCategory(category) {
+      document.getElementById('galeria').scrollIntoView({ behavior: 'smooth' });
+      filterGallery(category);
+    }
+
+    // Control de Lightbox
+    function openLightbox(photo) {
+      lightboxImg.src = photo.src;
+      lightboxTitle.textContent = photo.title;
+      lightboxExif.textContent = photo.exif;
+      lightbox.classList.add('active');
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+    }
+
+    // Cerrar con Escape
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // Cerrar al clickear fuera
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    // Inicializar
+    renderPhotos();
+  </script>
+</body>
+</html>
