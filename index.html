@@ -12,8 +12,7 @@
     :root {
       --bg-dark: #0a0b0e;
       --card-bg: #14171c;
-      --accent: #ff4757;
-      --accent-alt: #2ed573;
+      --accent: #d7ad68;
       --text-main: #f1f2f6;
       --text-muted: #a4b0be;
       --border-color: rgba(255, 255, 255, 0.08);
@@ -167,6 +166,79 @@
       scroll-margin-top: 90px;
     }
 
+    .about-section {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(240px, 0.6fr);
+      align-items: center;
+      gap: clamp(32px, 7vw, 100px);
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 110px 24px;
+      scroll-margin-top: 80px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .about-kicker,
+    .about-location-label {
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .about-title {
+      margin: 18px 0 24px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 4.5rem);
+      line-height: 1.04;
+      letter-spacing: -2px;
+    }
+
+    .about-title span {
+      color: var(--accent);
+    }
+
+    .about-copy {
+      max-width: 660px;
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.85;
+    }
+
+    .about-copy p + p {
+      margin-top: 14px;
+    }
+
+    .about-contact {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 28px;
+      background: linear-gradient(145deg, #15171a, #101114);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+    }
+
+    .about-contact strong {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
+    }
+
+    .about-contact a,
+    .email-link {
+      color: var(--text-main);
+      text-decoration-color: rgba(215, 173, 104, 0.55);
+      text-underline-offset: 4px;
+      overflow-wrap: anywhere;
+    }
+
+    .about-contact a:hover,
+    .email-link:hover {
+      color: var(--accent);
+    }
+
     .section-header {
       display: flex;
       justify-content: space-between;
@@ -238,6 +310,11 @@
 
     @media (max-width: 900px) {
       .masonry-grid { column-count: 2; }
+      .about-section {
+        grid-template-columns: minmax(0, 1.2fr) minmax(210px, 0.8fr);
+        gap: 32px;
+        padding: 80px 24px;
+      }
       .hero-split {
         height: auto;
         min-height: 100vh;
@@ -260,7 +337,7 @@
 
       nav {
         display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-template-columns: repeat(5, minmax(0, 1fr));
         gap: 4px;
         width: 100%;
       }
@@ -271,7 +348,7 @@
         align-items: center;
         justify-content: center;
         padding: 6px 2px;
-        font-size: 0.78rem;
+        font-size: 0.72rem;
         text-align: center;
       }
 
@@ -296,6 +373,28 @@
         margin: 56px auto;
         padding: 0 16px;
         scroll-margin-top: 110px;
+      }
+
+      .about-section {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        margin: 0 16px;
+        padding: 64px 0;
+        scroll-margin-top: 110px;
+      }
+
+      .about-title {
+        margin: 14px 0 18px;
+        letter-spacing: -1px;
+      }
+
+      .about-copy {
+        font-size: 0.94rem;
+        line-height: 1.75;
+      }
+
+      .about-contact {
+        padding: 22px;
       }
 
       .section-header {
@@ -722,6 +821,7 @@
     <a class="brand" href="#inicio" aria-label="GEFEPE, inicio">GEFEPE</a>
     <nav>
       <a href="#galeria" onclick="filterGallery('todos')">Galería</a>
+      <a href="#sobre-mi">Sobre mí</a>
       <a href="#galeria" onclick="filterGallery('deportes')">Deportes</a>
       <a href="#galeria" onclick="filterGallery('musica')">Música</a>
       <a href="#contacto">Contacto</a>
@@ -734,7 +834,7 @@
     <div class="split-side" onclick="goToCategory('deportes')">
       <div class="split-bg" style="background-image: url('assets/deportes-cover.png');"></div>
       <div class="split-content">
-        <span class="split-badge">Fútbol & Disciplinas</span>
+        <span class="split-badge">Fotografía en vivo</span>
         <h1 class="split-title">Deportes</h1>
         <span class="split-btn">Ver trabajos</span>
       </div>
@@ -749,6 +849,23 @@
         <span class="split-btn">Ver trabajos</span>
       </div>
     </div>
+  </section>
+
+  <!-- PRESENTACIÓN -->
+  <section class="about-section" id="sobre-mi">
+    <div>
+      <span class="about-kicker">Sobre mí · GEFEPE</span>
+      <h2 class="about-title">Historias reales.<br><span>Momentos vivos.</span></h2>
+      <div class="about-copy">
+        <p>Soy Gianfranco Pruzzo, fotógrafo freelance de 29 años. Me dedico a la fotografía en vivo y registro tanto eventos deportivos como shows y recitales, buscando capturar la energía y los momentos que hacen único cada encuentro.</p>
+        <p>También realicé trabajos en estudio, con esquemas de iluminación pensados para cada producción. Trabajo principalmente en CABA y alrededores, y estoy disponible para proyectos en otras zonas de la región.</p>
+      </div>
+    </div>
+    <aside class="about-contact">
+      <span class="about-location-label">Disponible para proyectos</span>
+      <strong>CABA y alrededores</strong>
+      <a href="mailto:pruzzogian@gmail.com">pruzzogian@gmail.com</a>
+    </aside>
   </section>
 
   <!-- GALERIA MASONRY -->
@@ -785,8 +902,9 @@
   <!-- CONTACTO -->
   <footer id="contacto">
     <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; margin-bottom: 10px;">¿Buscás cobertura para tu próximo evento?</h3>
-    <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto;">Partidos, torneos de fútbol 11 o shows en vivo. Captura de alta velocidad y entrega digital rápida.</p>
+    <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto;">Eventos deportivos, shows en vivo y producciones en estudio. Contactame y contame tu idea.</p>
     <a href="https://wa.me/5491123603710?text=Hola,%20me%20gustar%C3%ADa%20consultar%20por%20una%20cobertura%20fotogr%C3%A1fica" target="_blank" rel="noopener noreferrer" class="cta-btn">Consultar por WhatsApp</a>
+    <p style="margin-top: 16px;"><a href="mailto:pruzzogian@gmail.com" class="email-link">pruzzogian@gmail.com</a></p>
     <a href="https://www.instagram.com/gefe.pe/" target="_blank" rel="noopener noreferrer" class="instagram-link" aria-label="Visitar el perfil de Instagram de GEFEPE (@gefe.pe)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <rect x="3" y="3" width="18" height="18" rx="5"></rect>
@@ -972,6 +1090,7 @@
         id: 'moscu-espacio-cultural',
         category: 'musica',
         title: 'MOSCU ESPACIO CULTURAL',
+        cover: 'assets/MOSCU-ESPACIO-CULTURAL/DSC_0610-Enhanced-NR.jpg',
         photos: musicImages.map((filename, index) => ({
           id: index + 1,
           src: `assets/MOSCU-ESPACIO-CULTURAL/${filename}`
@@ -981,6 +1100,7 @@
         id: 'believen',
         category: 'musica',
         title: 'BELIEVEN',
+        cover: 'assets/BELIEVEN/DSC_0022-Enhanced-NR.jpg',
         photos: believenImages.map((filename, index) => ({
           id: index + 1,
           src: `assets/BELIEVEN/${filename}`
@@ -990,6 +1110,7 @@
         id: 'the-blues',
         category: 'musica',
         title: 'THE BLUES',
+        cover: 'assets/THE-BLUES/DSC_0163-Enhanced-NR.jpg',
         photos: bluesImages.map((filename, index) => ({
           id: index + 1,
           src: `assets/THE-BLUES/${filename}`
@@ -999,6 +1120,7 @@
         id: 'mujer-cebra',
         category: 'musica',
         title: 'MUJER CEBRA',
+        cover: 'assets/MUJER-CEBRA/DSC_0765-Enhanced-NR.jpg',
         photos: mujerCebraImages.map((filename, index) => ({
           id: index + 1,
           src: `assets/MUJER-CEBRA/${filename}`
@@ -1054,7 +1176,7 @@
         card.style.setProperty('--item-index', Math.min(index, 10));
         card.onclick = () => openAlbum(album.id);
         card.innerHTML = `
-          <img src="${album.photos[0].src}" alt="" loading="lazy">
+          <img src="${album.cover}" alt="" loading="lazy">
           <div class="photo-overlay">
             <h4>${album.title}</h4>
             <span class="album-count">${album.photos.length} fotografías</span>
