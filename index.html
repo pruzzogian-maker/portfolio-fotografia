@@ -66,13 +66,18 @@
     nav a {
       color: var(--text-muted);
       text-decoration: none;
-      margin-left: 28px;
       font-size: 0.95rem;
       transition: color 0.2s;
     }
 
     nav a:hover {
       color: var(--text-main);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
     }
 
     /* PORTADA DIVIDIDA (SPLIT SCREEN) */
@@ -159,6 +164,7 @@
       max-width: 1300px;
       margin: 80px auto;
       padding: 0 20px;
+      scroll-margin-top: 90px;
     }
 
     .section-header {
@@ -181,6 +187,10 @@
       flex-wrap: wrap;
     }
 
+    .filter-buttons[hidden] {
+      display: none;
+    }
+
     .filter-btn {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
@@ -199,22 +209,172 @@
       border-color: var(--text-main);
     }
 
+    .gallery-back {
+      background: none;
+      border: 0;
+      color: var(--text-muted);
+      cursor: pointer;
+      font: inherit;
+      padding: 8px 0;
+      transition: color 0.2s;
+    }
+
+    .gallery-back:hover,
+    .gallery-back:focus-visible {
+      color: var(--text-main);
+    }
+
     /* GRILLA MASONRY */
     .masonry-grid {
       column-count: 3;
       column-gap: 20px;
     }
 
+    .empty-gallery {
+      padding: 40px 20px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
     @media (max-width: 900px) {
       .masonry-grid { column-count: 2; }
-      .hero-split { flex-direction: column; }
+      .hero-split {
+        height: auto;
+        min-height: 100vh;
+        min-height: 100svh;
+        flex-direction: column;
+      }
+      .split-side { min-height: 40svh; }
       .split-side:hover { flex: 1; }
       .split-title { font-size: 2.2rem; }
     }
 
     @media (max-width: 550px) {
-      .masonry-grid { column-count: 1; }
-      header { padding: 0 20px; }
+      header {
+        height: auto;
+        min-height: 70px;
+        padding: 10px 16px;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      nav {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 4px;
+        width: 100%;
+      }
+
+      nav a {
+        display: flex;
+        min-height: 44px;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 2px;
+        font-size: 0.78rem;
+        text-align: center;
+      }
+
+      .hero-split {
+        padding-top: 100px;
+      }
+
+      .split-side {
+        min-height: 38svh;
+      }
+
+      .split-title {
+        font-size: clamp(1.8rem, 8vw, 2.2rem);
+      }
+
+      .split-badge {
+        font-size: 0.7rem;
+        letter-spacing: 1px;
+      }
+
+      .gallery-section {
+        margin: 56px auto;
+        padding: 0 16px;
+        scroll-margin-top: 110px;
+      }
+
+      .section-header {
+        align-items: flex-start;
+        gap: 14px;
+        margin-bottom: 24px;
+      }
+
+      .section-header h2 {
+        font-size: clamp(1.65rem, 7vw, 2rem);
+      }
+
+      .filter-buttons {
+        gap: 8px;
+      }
+
+      .filter-btn {
+        min-height: 44px;
+        padding: 8px 14px;
+      }
+
+      .gallery-back {
+        min-height: 44px;
+      }
+
+      .masonry-grid {
+        column-count: 2;
+        column-gap: 12px;
+      }
+
+      .photo-card {
+        margin-bottom: 12px;
+        border-radius: 8px;
+      }
+
+      .photo-overlay {
+        padding: 12px;
+      }
+
+      .album-card img {
+        max-height: 200px;
+      }
+
+      footer {
+        padding: 44px 18px;
+      }
+
+      footer h3 {
+        font-size: 1.45rem !important;
+      }
+
+      .cta-btn {
+        padding: 12px 20px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .masonry-grid {
+        column-count: 1;
+      }
+
+      .split-content {
+        padding: 16px 12px;
+      }
+
+      .lightbox-title {
+        font-size: 1rem;
+      }
+    }
+
+    @media (hover: none) {
+      .split-side:hover .split-bg,
+      .photo-card:hover img {
+        transform: none;
+      }
+
+      .split-side:hover .split-bg {
+        filter: brightness(0.45) grayscale(25%);
+      }
     }
 
     .photo-card {
@@ -226,6 +386,36 @@
       background: var(--card-bg);
       cursor: pointer;
       border: 1px solid var(--border-color);
+    }
+
+    .album-card {
+      width: 100%;
+      padding: 0;
+      color: inherit;
+      font: inherit;
+      text-align: left;
+    }
+
+    .album-card:focus-visible {
+      outline: 2px solid var(--text-main);
+      outline-offset: 3px;
+    }
+
+    .album-card img {
+      max-height: 280px;
+      object-fit: cover;
+    }
+
+    .album-card .photo-overlay {
+      opacity: 1;
+      transform: none;
+    }
+
+    .album-count {
+      display: block;
+      margin-top: 5px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
     }
 
     .photo-card img {
@@ -294,6 +484,46 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      touch-action: pan-y;
+    }
+
+    .lightbox-nav,
+    .lightbox-close {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      background: rgba(10, 11, 14, 0.7);
+      color: var(--text-main);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .lightbox-nav:hover,
+    .lightbox-close:hover,
+    .lightbox-nav:focus-visible,
+    .lightbox-close:focus-visible {
+      background: var(--text-main);
+      color: var(--bg-dark);
+    }
+
+    .lightbox-nav {
+      top: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 2rem;
+      line-height: 1;
+      transform: translateY(-50%);
+    }
+
+    .lightbox-prev {
+      left: 24px;
+    }
+
+    .lightbox-next {
+      right: 24px;
     }
 
     .lightbox-img {
@@ -315,24 +545,48 @@
       margin-bottom: 4px;
     }
 
-    .lightbox-exif {
+    .lightbox-counter {
       display: inline-block;
       margin-top: 6px;
       font-size: 0.85rem;
-      color: var(--accent);
-      background: rgba(255, 71, 87, 0.1);
+      color: var(--text-muted);
       padding: 4px 12px;
       border-radius: 20px;
-      font-family: monospace;
     }
 
     .lightbox-close {
-      position: absolute;
       top: 25px;
       right: 30px;
+      width: 44px;
+      height: 44px;
       font-size: 2rem;
-      color: var(--text-main);
-      cursor: pointer;
+      line-height: 1;
+    }
+
+    @media (max-width: 550px) {
+      .lightbox {
+        padding: 12px;
+      }
+
+      .lightbox-nav {
+        top: auto;
+        bottom: 88px;
+        width: 44px;
+        height: 44px;
+      }
+
+      .lightbox-prev {
+        left: 14px;
+      }
+
+      .lightbox-next {
+        right: 14px;
+      }
+
+      .lightbox-close {
+        top: 14px;
+        right: 14px;
+      }
     }
 
     /* FOOTER / CONTACTO */
@@ -361,16 +615,25 @@
     }
 
     .instagram-link {
-      display: block;
-      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
       margin: 18px auto 0;
       color: var(--text-muted);
       text-decoration: none;
       transition: color 0.2s;
     }
 
-    .instagram-link:hover {
+    .instagram-link:hover,
+    .instagram-link:focus-visible {
       color: var(--text-main);
+    }
+
+    .instagram-link svg {
+      width: 28px;
+      height: 28px;
     }
   </style>
 </head>
@@ -382,7 +645,7 @@
     <nav>
       <a href="#galeria" onclick="filterGallery('todos')">Galería</a>
       <a href="#galeria" onclick="filterGallery('deportes')">Deportes</a>
-      <a href="#galeria" onclick="filterGallery('recitales')">Recitales</a>
+      <a href="#galeria" onclick="filterGallery('musica')">Música</a>
       <a href="#contacto">Contacto</a>
     </nav>
   </header>
@@ -391,7 +654,7 @@
   <section class="hero-split" id="inicio">
     <!-- Mitad Deportes -->
     <div class="split-side" onclick="goToCategory('deportes')">
-      <div class="split-bg" style="background-image: url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1400&q=80');"></div>
+      <div class="split-bg" style="background-image: url('assets/deportes-cover.png');"></div>
       <div class="split-content">
         <span class="split-badge">Fútbol & Disciplinas</span>
         <h1 class="split-title">Deportes</h1>
@@ -399,12 +662,12 @@
       </div>
     </div>
 
-    <!-- Mitad Recitales -->
-    <div class="split-side" onclick="goToCategory('recitales')">
-      <div class="split-bg" style="background-image: url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1400&q=80');"></div>
+    <!-- Mitad Música -->
+    <div class="split-side" onclick="goToCategory('musica')">
+      <div class="split-bg" style="background-image: url('assets/recitales-cover.png');"></div>
       <div class="split-content">
         <span class="split-badge">En Vivo & Shows</span>
-        <h1 class="split-title">Recitales</h1>
+        <h1 class="split-title">Música</h1>
         <span class="split-btn">Ver trabajos</span>
       </div>
     </div>
@@ -413,12 +676,12 @@
   <!-- GALERIA MASONRY -->
   <main class="gallery-section" id="galeria">
     <div class="section-header">
-      <h2>Galería de Trabajos</h2>
-      <div class="filter-buttons">
-        <button class="filter-btn active" onclick="filterGallery('todos')">Todos</button>
-        <button class="filter-btn" onclick="filterGallery('deportes')">Deportes</button>
-        <button class="filter-btn" onclick="filterGallery('recitales')">Recitales</button>
-        <button class="filter-btn" onclick="filterGallery('detalle')">Detalle de Cancha</button>
+      <h2 id="galleryTitle">Galería de Trabajos</h2>
+      <button type="button" class="gallery-back" id="galleryBack" onclick="backToAlbums()" hidden>← Volver a los álbumes</button>
+      <div class="filter-buttons" id="galleryFilters">
+        <button class="filter-btn active" data-category="todos" onclick="filterGallery('todos')">Todos</button>
+        <button class="filter-btn" data-category="deportes" onclick="filterGallery('deportes')">Deportes</button>
+        <button class="filter-btn" data-category="musica" onclick="filterGallery('musica')">Música</button>
       </div>
     </div>
 
@@ -429,12 +692,14 @@
 
   <!-- LIGHTBOX / VISOR -->
   <div class="lightbox" id="lightbox">
-    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <button type="button" class="lightbox-close" onclick="closeLightbox()" aria-label="Cerrar visor">&times;</button>
+    <button type="button" class="lightbox-nav lightbox-prev" onclick="showPreviousPhoto()" aria-label="Ver foto anterior">&lsaquo;</button>
+    <button type="button" class="lightbox-nav lightbox-next" onclick="showNextPhoto()" aria-label="Ver foto siguiente">&rsaquo;</button>
     <div class="lightbox-content">
       <img src="" alt="" class="lightbox-img" id="lightboxImg">
       <div class="lightbox-meta">
         <h3 class="lightbox-title" id="lightboxTitle"></h3>
-        <span class="lightbox-exif" id="lightboxExif"></span>
+        <span class="lightbox-counter" id="lightboxCounter" aria-live="polite"></span>
       </div>
     </div>
   </div>
@@ -443,91 +708,306 @@
   <footer id="contacto">
     <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; margin-bottom: 10px;">¿Buscás cobertura para tu próximo evento?</h3>
     <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto;">Partidos, torneos de fútbol 11 o shows en vivo. Captura de alta velocidad y entrega digital rápida.</p>
-    <a href="https://wa.me/5491100000000?text=Hola,%20me%20gustar%C3%ADa%20consultar%20por%20una%20cobertura%20fotogr%C3%A1fica" target="_blank" class="cta-btn">Consultar por WhatsApp</a>
-    <a href="https://www.instagram.com/gefepe/" target="_blank" rel="noopener noreferrer" class="instagram-link" aria-label="Seguir a GEFEPE en Instagram">@gefepe en Instagram</a>
+    <a href="https://wa.me/5491123603710?text=Hola,%20me%20gustar%C3%ADa%20consultar%20por%20una%20cobertura%20fotogr%C3%A1fica" target="_blank" rel="noopener noreferrer" class="cta-btn">Consultar por WhatsApp</a>
+    <a href="https://www.instagram.com/gefe.pe/" target="_blank" rel="noopener noreferrer" class="instagram-link" aria-label="Visitar el perfil de Instagram de GEFEPE (@gefe.pe)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+        <circle cx="12" cy="12" r="4"></circle>
+        <circle cx="17.5" cy="6.5" r="0.75" fill="currentColor" stroke="none"></circle>
+      </svg>
+    </a>
   </footer>
 
   <script>
-    // Colección de fotografías (podés reemplazar las rutas de imagen 'src' por tus fotos locales de la carpeta img/)
-    const photos = [
+    // Agregá cada nuevo ZIP como un álbum y guardá sus fotos en una carpeta propia dentro de assets/.
+    const musicImages = [
+      'DSC_0610-Enhanced-NR.jpg',
+      'DSC_0799-Enhanced-NR.jpg',
+      'DSC_0743-Enhanced-NR.jpg',
+      'DSC_0661-Enhanced-NR.jpg',
+      'DSC_0410-Enhanced-NR.jpg',
+      'DSC_0764-Enhanced-NR.jpg',
+      'DSC_0275-Enhanced-NR.jpg',
+      'DSC_0736-Enhanced-NR.jpg',
+      'DSC_0596-Enhanced-NR.jpg',
+      'DSC_0510-Enhanced-NR.jpg',
+      'DSC_0663-Enhanced-NR.jpg',
+      'DSC_0123-Enhanced-NR.jpg',
+      'DSC_0455-Enhanced-NR.jpg',
+      'DSC_0045-Enhanced-NR.jpg',
+      'DSC_0636-Enhanced-NR.jpg',
+      'DSC_0712-Enhanced-NR.jpg',
+      'DSC_0405-Enhanced-NR.jpg',
+      'DSC_0761-Enhanced-NR.jpg',
+      'DSC_0187-Enhanced-NR.jpg',
+      'DSC_0318-Enhanced-NR.jpg',
+      'DSC_0253-Enhanced-NR.jpg',
+      'DSC_0529-Enhanced-NR.jpg',
+      'DSC_0106-Enhanced-NR.jpg',
+      'DSC_0151-Enhanced-NR.jpg',
+      'DSC_0021-Enhanced-NR.jpg',
+      'DSC_0157-Enhanced-NR.jpg',
+      'DSC_0709-Enhanced-NR.jpg',
+      'DSC_0150-Enhanced-NR.jpg',
+      'DSC_0317-Enhanced-NR.jpg',
+      'DSC_0582-Enhanced-NR.jpg',
+      'DSC_0470-Enhanced-NR.jpg',
+      'DSC_0549-Enhanced-NR.jpg',
+      'DSC_0370-Enhanced-NR.jpg',
+      'DSC_0790-Enhanced-NR.jpg',
+      'DSC_0567-Enhanced-NR.jpg',
+      'DSC_0805-Enhanced-NR.jpg',
+      'DSC_0337-Enhanced-NR.jpg',
+      'DSC_0401-Enhanced-NR.jpg',
+      'DSC_0553-Enhanced-NR.jpg',
+      'DSC_0044-Enhanced-NR.jpg',
+      'DSC_0544-Enhanced-NR.jpg',
+      'DSC_0137-Enhanced-NR.jpg',
+      'DSC_0312-Enhanced-NR.jpg',
+      'DSC_0570-Enhanced-NR.jpg',
+      'DSC_0539-Enhanced-NR.jpg',
+      'DSC_0054-Enhanced-NR.jpg',
+      'DSC_0535-Enhanced-NR.jpg',
+      'DSC_0091-Enhanced-NR.jpg',
+      'DSC_0517-Enhanced-NR.jpg',
+      'DSC_0208-Enhanced-NR.jpg',
+      'DSC_0141-Enhanced-NR.jpg',
+      'DSC_0657-Enhanced-NR.jpg',
+      'DSC_0017-Enhanced-NR.jpg',
+      'DSC_0294-Enhanced-NR.jpg',
+      'DSC_0734-Enhanced-NR.jpg',
+      'DSC_0134-Enhanced-NR.jpg',
+      'DSC_0528-Enhanced-NR.jpg',
+      'DSC_0272-Enhanced-NR.jpg',
+      'DSC_0098-Enhanced-NR.jpg',
+      'DSC_0741-Enhanced-NR.jpg',
+      'DSC_0722-Enhanced-NR.jpg',
+      'DSC_0477-Enhanced-NR.jpg'
+    ];
+
+    const believenImages = [
+      'DSC_0100-Enhanced-NR.jpg',
+      'DSC_0232-Enhanced-NR.jpg',
+      'DSC_0022-Enhanced-NR.jpg',
+      'DSC_0217-Enhanced-NR.jpg',
+      'DSC_0088-Enhanced-NR.jpg',
+      'DSC_0137-Enhanced-NR.jpg',
+      'DSC_0157-Enhanced-NR.jpg',
+      'DSC_0206-Enhanced-NR.jpg',
+      'DSC_0012-Enhanced-NR.jpg',
+      'DSC_0103-Enhanced-NR.jpg',
+      'DSC_0221-Enhanced-NR.jpg',
+      'DSC_0072-Enhanced-NR.jpg',
+      'DSC_0146-Enhanced-NR.jpg',
+      'DSC_0264-Enhanced-NR.jpg'
+    ];
+
+    const bluesImages = [
+      'DSC_0306-Enhanced-NR.jpg',
+      'DSC_0166-Enhanced-NR.jpg',
+      'DSC_0672-Enhanced-NR.jpg',
+      'DSC_0351-Enhanced-NR.jpg',
+      'DSC_0178-Enhanced-NR.jpg',
+      'DSC_1002-Enhanced-NR.jpg',
+      'DSC_0016-Enhanced-NR.jpg',
+      'DSC_0046-Enhanced-NR.jpg',
+      'DSC_0677-Enhanced-NR.jpg',
+      'DSC_0008-Enhanced-NR.jpg',
+      'DSC_0397-Enhanced-NR.jpg',
+      'DSC_0068-Enhanced-NR.jpg',
+      'DSC_0474-Enhanced-NR.jpg',
+      'DSC_0105-Enhanced-NR.jpg',
+      'DSC_0075-Enhanced-NR.jpg',
+      'DSC_0130-Enhanced-NR.jpg',
+      'DSC_0029-Enhanced-NR.jpg',
+      'DSC_0023-Enhanced-NR-2.jpg',
+      'DSC_0595-Enhanced-NR.jpg',
+      'DSC_0078-Enhanced-NR.jpg',
+      'DSC_0146-Enhanced-NR.jpg',
+      'DSC_0932-Enhanced-NR.jpg',
+      'DSC_0758-Enhanced-NR.jpg',
+      'DSC_0179-Enhanced-NR.jpg',
+      'DSC_0945-Enhanced-NR.jpg',
+      'DSC_0059-Enhanced-NR.jpg',
+      'DSC_0052-Enhanced-NR.jpg',
+      'DSC_0002-Enhanced-NR.jpg',
+      'DSC_0101-Enhanced-NR.jpg',
+      'DSC_0553-Enhanced-NR.jpg',
+      'DSC_1000-Enhanced-NR.jpg',
+      'DSC_0310-Enhanced-NR.jpg',
+      'DSC_0590-Enhanced-NR.jpg',
+      'DSC_0462-Enhanced-NR.jpg',
+      'DSC_0489-Enhanced-NR.jpg',
+      'DSC_0277-Enhanced-NR.jpg',
+      'DSC_0054-Enhanced-NR.jpg',
+      'DSC_0175-Enhanced-NR.jpg',
+      'DSC_0182-Enhanced-NR.jpg',
+      'DSC_0953-Enhanced-NR.jpg',
+      'DSC_0560-Enhanced-NR.jpg',
+      'DSC_0783-Enhanced-NR.jpg',
+      'DSC_0881-Enhanced-NR.jpg',
+      'DSC_0234-Enhanced-NR.jpg',
+      'DSC_0531-Enhanced-NR.jpg',
+      'DSC_0615-Enhanced-NR.jpg',
+      'DSC_0129-Enhanced-NR.jpg',
+      'DSC_0138-Enhanced-NR.jpg',
+      'DSC_0802-Enhanced-NR.jpg',
+      'DSC_0211-Enhanced-NR.jpg',
+      'DSC_0957-Enhanced-NR.jpg',
+      'DSC_0885-Enhanced-NR.jpg',
+      'DSC_0547-Enhanced-NR.jpg',
+      'DSC_0163-Enhanced-NR.jpg',
+      'DSC_0922-Enhanced-NR.jpg',
+      'DSC_0934-Enhanced-NR.jpg',
+      'DSC_0372-Enhanced-NR.jpg',
+      'DSC_0728-Enhanced-NR.jpg',
+      'DSC_0974-Enhanced-NR.jpg',
+      'DSC_0006-Enhanced-NR.jpg',
+      'DSC_0961-Enhanced-NR.jpg',
+      'DSC_0774-Enhanced-NR.jpg'
+    ];
+
+    const mujerCebraImages = [
+      'DSC_1038-Enhanced-NR.jpg',
+      'DSC_1020-Enhanced-NR.jpg',
+      'DSC_0880-Enhanced-NR.jpg',
+      'DSC_0906-Enhanced-NR.jpg',
+      'DSC_0761-Enhanced-NR.jpg',
+      'DSC_0708-Enhanced-NR.jpg',
+      'DSC_0882-Enhanced-NR.jpg',
+      'DSC_1026-Enhanced-NR.jpg',
+      'DSC_1062-Enhanced-NR.jpg',
+      'DSC_0810-Enhanced-NR.jpg',
+      'DSC_0765-Enhanced-NR.jpg',
+      'DSC_0740-Enhanced-NR.jpg',
+      'DSC_0957-Enhanced-NR.jpg',
+      'DSC_0828-Enhanced-NR.jpg',
+      'DSC_0977-Enhanced-NR.jpg',
+      'DSC_0719-Enhanced-NR.jpg',
+      'DSC_0769-Enhanced-NR.jpg',
+      'DSC_0995-Enhanced-NR.jpg',
+      'DSC_0963-Enhanced-NR.jpg'
+    ];
+
+    const albums = [
       {
-        id: 1,
-        category: 'deportes',
-        src: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1000&q=80',
-        title: 'Disputa aérea en el área',
-        exif: 'Nikon D7100 | Nikkor 70-300mm | 1/1250s - f/5.6 - ISO 1600'
+        id: 'moscu-espacio-cultural',
+        category: 'musica',
+        title: 'MOSCU ESPACIO CULTURAL',
+        photos: musicImages.map((filename, index) => ({
+          id: index + 1,
+          src: `assets/MOSCU-ESPACIO-CULTURAL/${filename}`
+        }))
       },
       {
-        id: 2,
-        category: 'recitales',
-        src: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1000&q=80',
-        title: 'Solo de guitarra bajo humo',
-        exif: 'Nikon D7100 | Yongnuo 35mm | 1/320s - f/2.0 - ISO 2500'
+        id: 'believen',
+        category: 'musica',
+        title: 'BELIEVEN',
+        photos: believenImages.map((filename, index) => ({
+          id: index + 1,
+          src: `assets/BELIEVEN/${filename}`
+        }))
       },
       {
-        id: 3,
-        category: 'detalle',
-        src: 'https://images.unsplash.com/photo-1517927033932-b3d18e61fb3a?auto=format&fit=crop&w=1000&q=80',
-        title: 'Dorsal en la previa del partido',
-        exif: 'Nikon D7100 | Nikkor 70-300mm @ 180mm | 1/1000s - f/5.0 - ISO 400'
+        id: 'the-blues',
+        category: 'musica',
+        title: 'THE BLUES',
+        photos: bluesImages.map((filename, index) => ({
+          id: index + 1,
+          src: `assets/THE-BLUES/${filename}`
+        }))
       },
       {
-        id: 4,
-        category: 'deportes',
-        src: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1000&q=80',
-        title: 'Ataque por banda derecha',
-        exif: 'Nikon D7100 | Nikkor 70-300mm | 1/1600s - f/5.6 - ISO 1250'
-      },
-      {
-        id: 5,
-        category: 'recitales',
-        src: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1000&q=80',
-        title: 'Luz cenital sobre escenario',
-        exif: 'Nikon D7100 | Yongnuo 35mm | 1/400s - f/2.2 - ISO 3200'
-      },
-      {
-        id: 6,
-        category: 'detalle',
-        src: 'https://images.unsplash.com/photo-1529900748604-07564a03e7a6?auto=format&fit=crop&w=1000&q=80',
-        title: 'Pelota sobre el césped',
-        exif: 'Nikon D7100 | Yongnuo 35mm | 1/800s - f/2.5 - ISO 200'
+        id: 'mujer-cebra',
+        category: 'musica',
+        title: 'MUJER CEBRA',
+        photos: mujerCebraImages.map((filename, index) => ({
+          id: index + 1,
+          src: `assets/MUJER-CEBRA/${filename}`
+        }))
       }
     ];
 
     const grid = document.getElementById('photoGrid');
+    const galleryTitle = document.getElementById('galleryTitle');
+    const galleryBack = document.getElementById('galleryBack');
+    const galleryFilters = document.getElementById('galleryFilters');
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightboxImg');
     const lightboxTitle = document.getElementById('lightboxTitle');
-    const lightboxExif = document.getElementById('lightboxExif');
+    const lightboxCounter = document.getElementById('lightboxCounter');
+    const lightboxContent = document.querySelector('.lightbox-content');
+    let currentAlbum = null;
+    let currentPhotoIndex = 0;
+    let touchStartX = null;
 
-    // Renderizar grilla
-    function renderPhotos(filter = 'todos') {
+    function renderAlbums(filter = 'todos') {
+      galleryTitle.textContent = filter === 'todos'
+        ? 'Álbumes'
+        : `Álbumes de ${filter === 'musica' ? 'Música' : 'Deportes'}`;
+      galleryBack.hidden = true;
+      galleryFilters.hidden = false;
       grid.innerHTML = '';
-      const filtered = filter === 'todos' 
-        ? photos 
-        : photos.filter(p => p.category === filter);
+      const filtered = filter === 'todos'
+        ? albums
+        : albums.filter(album => album.category === filter);
 
-      filtered.forEach(photo => {
-        const card = document.createElement('div');
-        card.className = 'photo-card';
-        card.onclick = () => openLightbox(photo);
+      if (filtered.length === 0) {
+        const message = document.createElement('p');
+        message.className = 'empty-gallery';
+        message.textContent = 'Todavía no hay álbumes en esta categoría.';
+        grid.appendChild(message);
+        return;
+      }
+
+      filtered.forEach(album => {
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = 'photo-card album-card';
+        card.onclick = () => openAlbum(album.id);
         card.innerHTML = `
-          <img src="${photo.src}" alt="${photo.title}" loading="lazy">
+          <img src="${album.photos[0].src}" alt="" loading="lazy">
           <div class="photo-overlay">
-            <h4>${photo.title}</h4>
-            <p>${photo.exif}</p>
+            <h4>${album.title}</h4>
+            <span class="album-count">${album.photos.length} fotografías</span>
           </div>
         `;
         grid.appendChild(card);
       });
     }
 
-    // Filtrar galería con botones
+    function openAlbum(albumId) {
+      const album = albums.find(item => item.id === albumId);
+      if (!album) {
+        throw new Error(`No se encontró el álbum "${albumId}".`);
+      }
+
+      galleryTitle.textContent = album.title;
+      galleryBack.hidden = false;
+      galleryFilters.hidden = true;
+      grid.innerHTML = '';
+
+      album.photos.forEach((photo, index) => {
+        const card = document.createElement('div');
+        card.className = 'photo-card';
+        card.onclick = () => openLightbox(album, index);
+        card.innerHTML = `
+          <img src="${photo.src}" alt="Fotografía del álbum ${album.title}" loading="lazy">
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function backToAlbums() {
+      const activeFilter = document.querySelector('.filter-btn.active');
+      filterGallery(activeFilter ? activeFilter.dataset.category : 'todos');
+    }
+
     function filterGallery(category) {
       document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.textContent.toLowerCase().includes(category) || (category === 'todos' && btn.textContent === 'Todos'));
+        btn.classList.toggle('active', btn.dataset.category === category);
       });
-      renderPhotos(category);
+      renderAlbums(category);
     }
 
     // Navegar desde el hero
@@ -537,21 +1017,57 @@
     }
 
     // Control de Lightbox
-    function openLightbox(photo) {
-      lightboxImg.src = photo.src;
-      lightboxTitle.textContent = photo.title;
-      lightboxExif.textContent = photo.exif;
+    function openLightbox(album, photoIndex) {
+      currentAlbum = album;
+      currentPhotoIndex = photoIndex;
+      updateLightboxPhoto();
       lightbox.classList.add('active');
+    }
+
+    function updateLightboxPhoto() {
+      const photo = currentAlbum.photos[currentPhotoIndex];
+      lightboxImg.src = photo.src;
+      lightboxImg.alt = `Fotografía del álbum ${currentAlbum.title}`;
+      lightboxTitle.textContent = currentAlbum.title;
+      lightboxCounter.textContent = `${currentPhotoIndex + 1} / ${currentAlbum.photos.length}`;
+    }
+
+    function showPreviousPhoto() {
+      if (!currentAlbum) return;
+      currentPhotoIndex = (currentPhotoIndex - 1 + currentAlbum.photos.length) % currentAlbum.photos.length;
+      updateLightboxPhoto();
+    }
+
+    function showNextPhoto() {
+      if (!currentAlbum) return;
+      currentPhotoIndex = (currentPhotoIndex + 1) % currentAlbum.photos.length;
+      updateLightboxPhoto();
     }
 
     function closeLightbox() {
       lightbox.classList.remove('active');
+      currentAlbum = null;
     }
 
-    // Cerrar con Escape
     window.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
       if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showPreviousPhoto();
+      if (e.key === 'ArrowRight') showNextPhoto();
     });
+
+    lightboxContent.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].clientX;
+    }, { passive: true });
+
+    lightboxContent.addEventListener('touchend', (e) => {
+      if (touchStartX === null) return;
+      const swipeDistance = e.changedTouches[0].clientX - touchStartX;
+      touchStartX = null;
+      if (Math.abs(swipeDistance) < 50) return;
+      if (swipeDistance < 0) showNextPhoto();
+      else showPreviousPhoto();
+    }, { passive: true });
 
     // Cerrar al clickear fuera
     lightbox.addEventListener('click', (e) => {
@@ -559,7 +1075,7 @@
     });
 
     // Inicializar
-    renderPhotos();
+    renderAlbums();
   </script>
 </body>
 </html>
