@@ -615,16 +615,23 @@
       .lightbox.active {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: minmax(0, 1fr) auto;
+        grid-template-rows: 44px minmax(0, 1fr) auto;
         justify-items: center;
         align-items: center;
         column-gap: 12px;
         row-gap: 8px;
       }
 
-      .lightbox-content {
+      .lightbox-close {
+        position: static;
         grid-column: 1 / -1;
         grid-row: 1;
+        justify-self: end;
+      }
+
+      .lightbox-content {
+        grid-column: 1 / -1;
+        grid-row: 2;
         width: 100%;
         max-width: 100%;
         max-height: 100%;
@@ -634,7 +641,7 @@
 
       .lightbox-img {
         width: 100%;
-        max-height: calc(100dvh - 190px);
+        max-height: calc(100dvh - 230px);
       }
 
       .lightbox-meta {
@@ -643,7 +650,7 @@
 
       .lightbox-nav {
         position: static;
-        grid-row: 2;
+        grid-row: 3;
         width: 48px;
         height: 48px;
         transform: none;
@@ -658,10 +665,6 @@
         grid-column: 2;
       }
 
-      .lightbox-close {
-        top: max(12px, env(safe-area-inset-top));
-        right: 12px;
-      }
     }
 
     /* FOOTER / CONTACTO */
