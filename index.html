@@ -1401,7 +1401,7 @@
     const portfolioIntroEnter = document.getElementById('portfolioIntroEnter');
     const MUSIC_START_TIME = 45;
     const MUSIC_VOLUME = 0.12;
-    const MUSIC_FADE_DURATION = 4000;
+    const MUSIC_FADE_DURATION = 10000;
     let currentAlbum = null;
     let currentPhotoIndex = 0;
     let touchStartX = null;
@@ -1422,7 +1422,8 @@
         if (backgroundMusic.paused) return;
 
         const progress = Math.min((now - fadeStartedAt) / MUSIC_FADE_DURATION, 1);
-        backgroundMusic.volume = MUSIC_VOLUME * progress;
+        const easedProgress = progress * progress * (3 - 2 * progress);
+        backgroundMusic.volume = MUSIC_VOLUME * easedProgress;
         if (progress < 1) {
           musicFadeFrame = requestAnimationFrame(fadeIn);
         } else {
