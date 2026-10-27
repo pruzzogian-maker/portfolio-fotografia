@@ -1543,6 +1543,12 @@
       musicPlayerStatus.textContent = 'No se pudo cargar la música.';
     });
 
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden && !backgroundMusic.paused) {
+        backgroundMusic.pause();
+      }
+    });
+
     function preventPhotoActions(event) {
       if (event.target instanceof Element && event.target.closest('img')) {
         event.preventDefault();
