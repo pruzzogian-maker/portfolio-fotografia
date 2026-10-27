@@ -1373,7 +1373,41 @@
       'DSC_0532-Enhanced-NR.jpg'
     ];
 
+    const marathonImages = [
+      'Picsart_23-11-13_18-54-13-510.jpg',
+      'Picsart_23-11-15_21-06-26-809.jpg',
+      'Fla - ROGER- Lau-hector- Gian.jpg',
+      'IVI -_.jpg',
+      'IVI - Lau.jpg',
+      'IVI - Fla_.jpg',
+      'Picsart_23-11-13_20-08-15-227.jpg',
+      'Picsart_23-11-13_23-46-27-632.jpg',
+      'Picsart_23-11-15_21-05-53-738.jpg',
+      'IVI - ROGER- Gian.jpg',
+      'Lau.jpg',
+      'Lau(1).jpg',
+      'Picsart_23-11-13_20-07-16-057.jpg',
+      'ROGER-Gian.jpg',
+      'Picsart_23-11-13_18-53-45-775.jpg',
+      'Picsart_23-11-13_20-06-50-120.jpg',
+      'Picsart_23-11-13_20-07-42-309.jpg',
+      'Picsart_23-11-15_21-44-48-410.jpg',
+      'Picsart_23-11-13_20-08-06-748.jpg',
+      'Fla-hector- Gian.jpg',
+      'Lau -hector.jpg'
+    ];
+
     const albums = [
+      {
+        id: 'maraton',
+        category: 'deportes',
+        title: 'MARATON',
+        cover: 'assets/MARATON/Picsart_23-11-13_18-54-13-510.jpg',
+        photos: marathonImages.map((filename, index) => ({
+          id: index + 1,
+          src: `assets/MARATON/${filename}`
+        }))
+      },
       {
         id: 'moscu-espacio-cultural',
         category: 'musica',
