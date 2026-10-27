@@ -38,35 +38,15 @@
       display: grid;
       place-items: center;
       overflow: hidden;
-      background: var(--bg-dark);
-      transition: opacity 650ms ease, visibility 650ms ease;
-    }
-
-    .portfolio-intro::before,
-    .portfolio-intro::after {
-      position: absolute;
-      inset: 0;
-      content: "";
-      pointer-events: none;
-    }
-
-    .portfolio-intro::before {
-      background:
-        linear-gradient(90deg, rgba(10, 11, 14, 0.72), rgba(10, 11, 14, 0.28) 50%, rgba(10, 11, 14, 0.72)),
-        url("assets/deportes-cover.png") left center / 50% 100% no-repeat,
-        url("assets/recitales-cover.png") right center / 50% 100% no-repeat;
-      filter: brightness(0.58);
-      transform: scale(1.02);
-    }
-
-    .portfolio-intro::after {
-      background: radial-gradient(ellipse at center, rgba(10, 11, 14, 0.18), rgba(10, 11, 14, 0.62) 75%);
+      background: #000;
+      transition: opacity 750ms ease, visibility 750ms ease, transform 750ms ease;
     }
 
     .portfolio-intro.is-leaving {
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
+      transform: scale(1.02);
     }
 
     .portfolio-intro-content {
@@ -148,13 +128,6 @@
     }
 
     @media (max-width: 550px) {
-      .portfolio-intro::before {
-        background:
-          linear-gradient(rgba(10, 11, 14, 0.38), rgba(10, 11, 14, 0.5)),
-          url("assets/deportes-cover.png") center top / 100% 50% no-repeat,
-          url("assets/recitales-cover.png") center bottom / 100% 50% no-repeat;
-      }
-
       .portfolio-intro-title {
         margin: 18px 0 28px;
       }
