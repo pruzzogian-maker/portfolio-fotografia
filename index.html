@@ -1397,6 +1397,31 @@
       'Lau -hector.jpg'
     ];
 
+    const handballImages = [
+      'DSC_0564-18.jpg',
+      'DSC_0063-1.jpg',
+      'DSC_0269-8.jpg',
+      'DSC_0673-22.jpg',
+      'DSC_0451-15.jpg',
+      'DSC_0668-21.jpg',
+      'DSC_0210-5.jpg',
+      'DSC_0199-4.jpg',
+      'DSC_0452-16.jpg',
+      'DSC_0592-20.jpg',
+      'DSC_0258-7.jpg',
+      'DSC_0591-19.jpg',
+      'DSC_0278-10.jpg',
+      'DSC_0333-12.jpg',
+      'DSC_0485-17.jpg',
+      'DSC_0255-6.jpg',
+      'DSC_0128-2.jpg',
+      'DSC_0294-11.jpg',
+      'DSC_0351-13.jpg',
+      'DSC_0136-3.jpg',
+      'DSC_0398-14.jpg',
+      'DSC_0270-9.jpg'
+    ];
+
     const albums = [
       {
         id: 'maraton',
@@ -1406,6 +1431,16 @@
         photos: marathonImages.map((filename, index) => ({
           id: index + 1,
           src: `assets/MARATON/${filename}`
+        }))
+      },
+      {
+        id: 'handball',
+        category: 'deportes',
+        title: 'HANDBALL',
+        cover: 'assets/HANDBALL/DSC_0063-1.jpg',
+        photos: handballImages.map((filename, index) => ({
+          id: index + 1,
+          src: `assets/HANDBALL/${filename}`
         }))
       },
       {
