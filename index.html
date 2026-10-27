@@ -436,6 +436,12 @@
       column-gap: 20px;
     }
 
+    .masonry-grid img,
+    .lightbox-img {
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
     .empty-gallery {
       padding: 40px 20px;
       color: var(--text-muted);
@@ -1128,7 +1134,7 @@
     <button type="button" class="lightbox-nav lightbox-prev" onclick="showPreviousPhoto()" aria-label="Ver foto anterior">&lsaquo;</button>
     <button type="button" class="lightbox-nav lightbox-next" onclick="showNextPhoto()" aria-label="Ver foto siguiente">&rsaquo;</button>
     <div class="lightbox-content">
-      <img src="" alt="" class="lightbox-img" id="lightboxImg">
+      <img src="" alt="" class="lightbox-img" id="lightboxImg" draggable="false">
       <div class="lightbox-meta">
         <h3 class="lightbox-title" id="lightboxTitle"></h3>
         <span class="lightbox-counter" id="lightboxCounter" aria-live="polite"></span>
@@ -1394,10 +1400,38 @@
     const portfolioIntro = document.getElementById('portfolioIntro');
     const portfolioIntroEnter = document.getElementById('portfolioIntroEnter');
     const MUSIC_START_TIME = 45;
+    const MUSIC_VOLUME = 0.12;
+    const MUSIC_FADE_DURATION = 4000;
     let currentAlbum = null;
     let currentPhotoIndex = 0;
     let touchStartX = null;
-    backgroundMusic.volume = 0.25;
+    let musicFadeFrame = null;
+    backgroundMusic.volume = 0;
+
+    async function playBackgroundMusic() {
+      if (musicFadeFrame !== null) {
+        cancelAnimationFrame(musicFadeFrame);
+        musicFadeFrame = null;
+      }
+
+      backgroundMusic.volume = 0;
+      await backgroundMusic.play();
+
+      const fadeStartedAt = performance.now();
+      const fadeIn = (now) => {
+        if (backgroundMusic.paused) return;
+
+        const progress = Math.min((now - fadeStartedAt) / MUSIC_FADE_DURATION, 1);
+        backgroundMusic.volume = MUSIC_VOLUME * progress;
+        if (progress < 1) {
+          musicFadeFrame = requestAnimationFrame(fadeIn);
+        } else {
+          musicFadeFrame = null;
+        }
+      };
+
+      musicFadeFrame = requestAnimationFrame(fadeIn);
+    }
 
     portfolioIntroEnter.focus();
 
@@ -1415,11 +1449,10 @@
       });
       portfolioIntro.classList.add('is-leaving');
       portfolioIntro.setAttribute('aria-hidden', 'true');
-      document.querySelector('.brand').focus();
 
       backgroundMusic.currentTime = MUSIC_START_TIME;
       try {
-        await backgroundMusic.play();
+        await playBackgroundMusic();
       } catch (error) {
         if (error.name === 'AbortError' && backgroundMusic.paused) return;
         console.error('No se pudo reproducir la música de fondo.', error);
@@ -1442,7 +1475,7 @@
       }
 
       try {
-        await backgroundMusic.play();
+        await playBackgroundMusic();
       } catch (error) {
         if (error.name === 'AbortError' && backgroundMusic.paused) return;
         console.error('No se pudo reproducir la música de fondo.', error);
@@ -1454,9 +1487,27 @@
       musicPlayerStatus.textContent = '';
       updateMusicPlayer(true);
     });
-    backgroundMusic.addEventListener('pause', () => updateMusicPlayer(false));
+    backgroundMusic.addEventListener('pause', () => {
+      if (musicFadeFrame !== null) {
+        cancelAnimationFrame(musicFadeFrame);
+        musicFadeFrame = null;
+      }
+      backgroundMusic.volume = 0;
+      updateMusicPlayer(false);
+    });
     backgroundMusic.addEventListener('error', () => {
       musicPlayerStatus.textContent = 'No se pudo cargar la música.';
+    });
+
+    function preventPhotoActions(event) {
+      if (event.target instanceof Element && event.target.closest('img')) {
+        event.preventDefault();
+      }
+    }
+
+    [grid, lightbox].forEach(container => {
+      container.addEventListener('contextmenu', preventPhotoActions);
+      container.addEventListener('dragstart', preventPhotoActions);
     });
 
     function animateGallery() {
@@ -1494,7 +1545,7 @@
         card.style.setProperty('--item-index', Math.min(index, 10));
         card.onclick = () => openAlbum(album.id);
         card.innerHTML = `
-          <img src="${album.cover}" alt="" loading="lazy">
+          <img src="${album.cover}" alt="" loading="lazy" draggable="false">
           <div class="photo-overlay">
             <h4>${album.title}</h4>
             <span class="album-count">${album.photos.length} fotografías</span>
@@ -1522,7 +1573,7 @@
         card.style.setProperty('--item-index', Math.min(index, 10));
         card.onclick = () => openLightbox(album, index);
         card.innerHTML = `
-          <img src="${photo.src}" alt="Fotografía del álbum ${album.title}" loading="lazy">
+          <img src="${photo.src}" alt="Fotografía del álbum ${album.title}" loading="lazy" draggable="false">
         `;
         grid.appendChild(card);
       });
