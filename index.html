@@ -1437,6 +1437,44 @@
       'DSC_0139-Enhanced-NR.jpg'
     ];
 
+    const vicenteYLosCuriososImages = [
+      'DSC_0840-Enhanced-NR.jpg',
+      'DSC_0974-Enhanced-NR.jpg',
+      'DSC_0694-Enhanced-NR.jpg',
+      'DSC_0647-Enhanced-NR.jpg',
+      'DSC_0020-Enhanced-NR.jpg',
+      'DSC_0631-Enhanced-NR.jpg',
+      'DSC_0684-Enhanced-NR.jpg',
+      'DSC_0884-Enhanced-NR.jpg',
+      'DSC_0033-Enhanced-NR.jpg',
+      'DSC_0879-Enhanced-NR.jpg',
+      'DSC_0864-Enhanced-NR.jpg',
+      'DSC_0007-Enhanced-NR.jpg',
+      'DSC_0001-Enhanced-NR.jpg',
+      'DSC_0827-Enhanced-NR.jpg',
+      'DSC_0016-Enhanced-NR.jpg',
+      'DSC_0966-Enhanced-NR.jpg',
+      'DSC_0799-Enhanced-NR.jpg',
+      'DSC_0607-Enhanced-NR.jpg',
+      'DSC_0702-Enhanced-NR.jpg',
+      'DSC_0710-Enhanced-NR.jpg',
+      'DSC_0987-Enhanced-NR.jpg',
+      'DSC_0720-Enhanced-NR.jpg',
+      'DSC_0765-Enhanced-NR.jpg',
+      'DSC_0714-Enhanced-NR.jpg',
+      'DSC_0624-Enhanced-NR.jpg',
+      'DSC_0663-Enhanced-NR.jpg',
+      'DSC_0697-Enhanced-NR.jpg',
+      'DSC_0784-Enhanced-NR.jpg',
+      'DSC_0892-Enhanced-NR.jpg',
+      'DSC_0712-Enhanced-NR.jpg',
+      'DSC_0666-Enhanced-NR.jpg',
+      'DSC_0635-Enhanced-NR.jpg',
+      'DSC_0638-Enhanced-NR.jpg',
+      'DSC_0889-Enhanced-NR.jpg',
+      'DSC_0718-Enhanced-NR.jpg'
+    ];
+
     const albums = [
       {
         id: 'maraton',
@@ -1516,6 +1554,16 @@
         photos: shopinSurImages.map((filename, index) => ({
           id: index + 1,
           src: `assets/SHOPIN-SUR/${filename}`
+        }))
+      },
+      {
+        id: 'vicente-y-los-curiosos',
+        category: 'musica',
+        title: 'VICENTE Y LOS CURIOSOS',
+        cover: 'assets/VICENTE-Y-LOS-CURIOSOS/DSC_0840-Enhanced-NR.jpg',
+        photos: vicenteYLosCuriososImages.map((filename, index) => ({
+          id: index + 1,
+          src: `assets/VICENTE-Y-LOS-CURIOSOS/${filename}`
         }))
       }
     ];
