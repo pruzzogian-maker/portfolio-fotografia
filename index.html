@@ -1586,6 +1586,26 @@
       'DSC_0429-Enhanced-NR.jpg'
     ];
 
+    const revistasImages = [
+      'DSC_0003-Enhanced-NR.jpg',
+      'DSC_0021-Enhanced-NR.jpg',
+      'DSC_0031-Enhanced-NR.jpg',
+      'DSC_0068-Enhanced-NR.jpg',
+      'DSC_0107-Enhanced-NR.jpg',
+      'DSC_0129-Enhanced-NR.jpg',
+      'DSC_0137-Enhanced-NR.jpg',
+      'DSC_0144-Enhanced-NR.jpg',
+      'DSC_0147-Enhanced-NR.jpg',
+      'DSC_0176-Enhanced-NR.jpg',
+      'DSC_0219-Enhanced-NR.jpg',
+      'DSC_0269-Enhanced-NR.jpg',
+      'DSC_0287-Enhanced-NR.jpg',
+      'DSC_0294-Enhanced-NR.jpg',
+      'DSC_0302-Enhanced-NR.jpg',
+      'DSC_0310-Enhanced-NR.jpg',
+      'DSC_0359-Enhanced-NR.jpg'
+    ];
+
     const albums = [
       {
         id: 'maraton',
@@ -1715,6 +1735,16 @@
         photos: vulebardImages.map((filename, index) => ({
           id: index + 1,
           src: `assets/VULEBARD/${filename}`
+        }))
+      },
+      {
+        id: 'revistas',
+        category: 'musica',
+        title: 'REVISTAS',
+        cover: 'assets/REVISTAS/DSC_0107-Enhanced-NR.jpg',
+        photos: revistasImages.map((filename, index) => ({
+          id: index + 1,
+          src: `assets/REVISTAS/${filename}`
         }))
       }
     ];
