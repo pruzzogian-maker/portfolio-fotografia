@@ -1395,6 +1395,48 @@
       'DSC_0270-9.jpg'
     ];
 
+    const shopinSurImages = [
+      'DSC_0207-Enhanced-NR.jpg',
+      'DSC_0344-Enhanced-NR.jpg',
+      'DSC_0102-Enhanced-NR.jpg',
+      'DSC_0104-Enhanced-NR.jpg',
+      'DSC_0127-Enhanced-NR.jpg',
+      'DSC_0272-Enhanced-NR.jpg',
+      'DSC_0061-Enhanced-NR.jpg',
+      'DSC_0050-Enhanced-NR.jpg',
+      'DSC_0372-Enhanced-NR.jpg',
+      'DSC_0052-Enhanced-NR.jpg',
+      'DSC_0242-Enhanced-NR.jpg',
+      'DSC_0120-Enhanced-NR.jpg',
+      'DSC_0130-Enhanced-NR.jpg',
+      'DSC_0202-Enhanced-NR.jpg',
+      'DSC_0347-Enhanced-NR.jpg',
+      'DSC_0246-Enhanced-NR.jpg',
+      'DSC_0295-Enhanced-NR.jpg',
+      'DSC_0059-Enhanced-NR.jpg',
+      'DSC_0062-Enhanced-NR.jpg',
+      'DSC_0194-Enhanced-NR.jpg',
+      'DSC_0318-Enhanced-NR.jpg',
+      'DSC_0043-Enhanced-NR.jpg',
+      'DSC_0180-Enhanced-NR.jpg',
+      'DSC_0128-Enhanced-NR.jpg',
+      'DSC_0086-Enhanced-NR.jpg',
+      'DSC_0078-Enhanced-NR.jpg',
+      'DSC_0024-Enhanced-NR.jpg',
+      'DSC_0190-Enhanced-NR.jpg',
+      'DSC_0303-Enhanced-NR.jpg',
+      'DSC_0125-Enhanced-NR.jpg',
+      'DSC_0163-Enhanced-NR.jpg',
+      'DSC_0151-Enhanced-NR.jpg',
+      'DSC_0300-Enhanced-NR.jpg',
+      'DSC_0106-Enhanced-NR.jpg',
+      'DSC_0031-Enhanced-NR.jpg',
+      'DSC_0049-Enhanced-NR.jpg',
+      'DSC_0552-Enhanced-NR.jpg',
+      'DSC_0010-Enhanced-NR.jpg',
+      'DSC_0139-Enhanced-NR.jpg'
+    ];
+
     const albums = [
       {
         id: 'maraton',
@@ -1464,6 +1506,16 @@
         photos: satanaImages.map((filename, index) => ({
           id: index + 1,
           src: `assets/SATANA-SATANA/${filename}`
+        }))
+      },
+      {
+        id: 'shopin-sur',
+        category: 'musica',
+        title: 'SHOPIN SUR',
+        cover: 'assets/SHOPIN-SUR/DSC_0207-Enhanced-NR.jpg',
+        photos: shopinSurImages.map((filename, index) => ({
+          id: index + 1,
+          src: `assets/SHOPIN-SUR/${filename}`
         }))
       }
     ];
